@@ -3,7 +3,7 @@ import { whatWeDo } from "../data/siteContent";
 export function ServicesSection() {
   return (
     <section className="landing-section" id="que-hacemos">
-      <div className="section-heading">
+      <div className="section-heading section-heading--center">
         <p className="section-heading__eyebrow">Que hacemos en RENPIA</p>
         <h2>Conectamos tecnologia, negocio y automatizacion para ayudar a las empresas a operar mejor.</h2>
         <p className="section-heading__description">

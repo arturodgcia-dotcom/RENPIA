@@ -4,7 +4,7 @@ import { demos } from "../data/siteContent";
 export function DemosSection() {
   return (
     <section className="landing-section" id="demos">
-      <div className="section-heading">
+      <div className="section-heading section-heading--center">
         <p className="section-heading__eyebrow">Demos disponibles</p>
         <h2>Conoce el producto antes de decidir.</h2>
         <p className="section-heading__description">

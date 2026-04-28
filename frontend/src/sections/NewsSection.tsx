@@ -5,7 +5,7 @@ import { newsItems } from "../data/siteContent";
 export function NewsSection() {
   return (
     <section className="landing-section" id="noticias">
-      <div className="section-heading">
+      <div className="section-heading section-heading--center">
         <p className="section-heading__eyebrow">Noticias IA & Blog RENPIA</p>
         <h2>Noticias, tendencias y ventajas de la IA en el mundo actual</h2>
         <p className="section-heading__description">
