@@ -1,0 +1,22 @@
+name: Deploy RENPIA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guardrail
+        run: |
+          echo "Workflow preparado pero no activado para despliegue automatico."
+          echo "Habilitar solo cuando el VPS, SSH keys, dominio y secretos esten configurados."
+
+      # Futuro flujo:
+      # - Checkout del repo
+      # - Validacion de build
+      # - SSH al VPS
+      # - git pull
+      # - migraciones
+      # - build frontend
+      # - restart de servicios

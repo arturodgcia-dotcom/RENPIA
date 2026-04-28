@@ -1,0 +1,15 @@
+[Unit]
+Description=RENPIA FastAPI
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/renpia/backend
+EnvironmentFile=/var/www/renpia/backend/.env
+ExecStart=/var/www/renpia/backend/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=RENPIA Worker
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/renpia/backend
+EnvironmentFile=/var/www/renpia/backend/.env
+ExecStart=/var/www/renpia/backend/.venv/bin/python -m app.workers.scheduler
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
