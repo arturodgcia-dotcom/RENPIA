@@ -3,7 +3,7 @@ import { products } from "../data/siteContent";
 
 export function ProductsSection() {
   return (
-    <section className="landing-section" id="soluciones">
+    <section className="landing-section landing-section--airy landing-section--products" id="soluciones">
       <div className="section-heading">
         <p className="section-heading__eyebrow">Nuestros desarrollos</p>
         <h2>Soluciones con identidad propia para diferentes frentes del negocio.</h2>

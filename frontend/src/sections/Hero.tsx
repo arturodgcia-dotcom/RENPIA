@@ -33,6 +33,21 @@ export function Hero() {
             Quiero una propuesta
           </Button>
         </div>
+
+        <div className="hero__proof">
+          <article>
+            <strong>58</strong>
+            <span>procesos optimizados</span>
+          </article>
+          <article>
+            <strong>24</strong>
+            <span>automatizaciones activas</span>
+          </article>
+          <article>
+            <strong>12</strong>
+            <span>agentes IA activos</span>
+          </article>
+        </div>
       </div>
 
       <div className="hero__panel" aria-label="Visual RENPIA">

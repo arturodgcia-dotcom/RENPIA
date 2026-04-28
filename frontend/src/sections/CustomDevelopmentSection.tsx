@@ -4,7 +4,7 @@ import { customDevelopmentItems } from "../data/siteContent";
 
 export function CustomDevelopmentSection() {
   return (
-    <section className="landing-section" id="desarrollo-medida">
+    <section className="landing-section landing-section--feature" id="desarrollo-medida">
       <div className="custom-layout">
         <div className="custom-layout__copy">
           <div className="section-heading">

@@ -5,7 +5,7 @@ export function FAQSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="landing-section" id="faq">
+    <section className="landing-section landing-section--surface landing-section--faq" id="faq">
       <div className="section-heading">
         <p className="section-heading__eyebrow">FAQ SEO / AEO</p>
         <h2>Preguntas frecuentes pensadas para visibilidad, claridad y confianza.</h2>

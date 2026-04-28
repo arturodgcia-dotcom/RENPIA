@@ -3,7 +3,7 @@ import { agendaOptions } from "../data/siteContent";
 
 export function AppointmentSection() {
   return (
-    <section className="landing-section" id="agenda">
+    <section className="landing-section landing-section--surface landing-section--agenda" id="agenda">
       <div className="agenda-layout">
         <div>
           <div className="section-heading">

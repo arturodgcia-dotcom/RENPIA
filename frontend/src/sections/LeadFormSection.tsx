@@ -89,7 +89,7 @@ export function LeadFormSection() {
   }
 
   return (
-    <section className="landing-section" id="formulario">
+    <section className="landing-section landing-section--surface landing-section--form" id="formulario">
       <div className="prospect-layout">
         <div className="prospect-layout__form">
           <div className="section-heading">

@@ -3,7 +3,7 @@ import { demos } from "../data/siteContent";
 
 export function DemosSection() {
   return (
-    <section className="landing-section" id="demos">
+    <section className="landing-section landing-section--airy landing-section--demos" id="demos">
       <div className="demos-layout">
         <div className="section-heading">
           <p className="section-heading__eyebrow">Demos disponibles</p>

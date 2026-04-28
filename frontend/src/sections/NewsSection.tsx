@@ -4,7 +4,7 @@ import { newsItems } from "../data/siteContent";
 
 export function NewsSection() {
   return (
-    <section className="landing-section" id="noticias">
+    <section className="landing-section landing-section--surface landing-section--news" id="noticias">
       <div className="news-layout">
         <div className="news-editorial">
           <div className="section-heading">
