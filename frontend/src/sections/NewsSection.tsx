@@ -1,46 +1,45 @@
 import { Button } from "../components/Button";
 import { NewsCard } from "../components/NewsCard";
-import { newsItems } from "../data/siteContent";
+import { useI18n } from "../i18n/I18nProvider";
+import { archivePolicySummary, getFeaturedPosts } from "../services/newsService";
 
 export function NewsSection() {
+  const { locale, content } = useI18n();
+
   return (
     <section className="landing-section landing-section--surface landing-section--news" id="noticias">
       <div className="news-layout">
         <div className="news-editorial">
           <div className="section-heading">
-            <p className="section-heading__eyebrow">Noticias IA & Blog RENPIA</p>
-            <h2>Noticias, tendencias y ventajas de la IA en el mundo actual</h2>
-            <p className="section-heading__description">
-              Nuestro Agente editorial RENPIA publica 1 noticia diaria sobre automatizacion,
-              productividad, ventas, servicio al cliente, innovacion y transformacion digital.
-            </p>
+            <p className="section-heading__eyebrow">{content.news.eyebrow}</p>
+            <h2>{content.news.title}</h2>
+            <p className="section-heading__description">{content.news.description}</p>
           </div>
 
           <div className="news-editorial__card">
-            <span>Agente Editorial RENPIA</span>
-            <strong>Curaduria diaria con enfoque empresarial</strong>
+            <span>{content.news.editorialBadge}</span>
+            <strong>{content.news.editorialTitle}</strong>
             <ul>
-              <li>Automatizacion, productividad y crecimiento</li>
-              <li>Ventas, servicio y transformacion digital</li>
-              <li>Hasta 30 noticias activas y archivo automatico</li>
-              <li>Depuracion editorial y renovacion cada 7 meses</li>
+              {content.news.editorialPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
             </ul>
           </div>
 
           <div className="news-foot">
-            <p>Publicacion diaria | hasta 30 noticias activas | archivo automatico | depuracion cada 7 meses</p>
+            <p>{archivePolicySummary(locale)}</p>
             <div className="news-foot__actions">
-              <Button href="#contacto" variant="secondary">
-                Leer blog
+              <Button href="/blog" variant="secondary">
+                {content.news.primaryCta}
               </Button>
-              <Button href="#contacto">Hablar con RENPIA</Button>
+              <Button href="#contacto">{content.news.secondaryCta}</Button>
             </div>
           </div>
         </div>
 
         <div className="news-grid">
-          {newsItems.map((item) => (
-            <NewsCard key={item.title} item={item} />
+          {getFeaturedPosts().map((item) => (
+            <NewsCard key={item.slug} item={item} locale={locale} />
           ))}
         </div>
       </div>

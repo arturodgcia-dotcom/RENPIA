@@ -1,3 +1,5 @@
+import { useI18n } from "../i18n/I18nProvider";
+
 export type FallbackType =
   | "kanban"
   | "ecommerce"
@@ -12,22 +14,58 @@ type PlatformMockupProps = {
   title?: string;
 };
 
-const labels: Record<FallbackType, string[]> = {
-  kanban: ["Dashboard", "Sprint", "Proyectos"],
-  ecommerce: ["Tienda", "Catalogo", "Ventas"],
-  marketing: ["Campanas", "Calendario", "Metricas"],
-  hr: ["Empleados", "Asistencia", "Reportes"],
-  dashboard: ["CRM", "Agente IA", "Dashboards"],
-  consultoria: ["Workshop", "Proceso", "Insights"],
+const labels = {
+  kanban: {
+    es: ["Dashboard", "Sprint", "Proyectos"],
+    en: ["Dashboard", "Sprint", "Projects"],
+  },
+  ecommerce: {
+    es: ["Tienda", "Catalogo", "Ventas"],
+    en: ["Store", "Catalog", "Sales"],
+  },
+  marketing: {
+    es: ["Campanas", "Calendario", "Metricas"],
+    en: ["Campaigns", "Calendar", "Metrics"],
+  },
+  hr: {
+    es: ["Empleados", "Asistencia", "Reportes"],
+    en: ["Employees", "Attendance", "Reports"],
+  },
+  dashboard: {
+    es: ["CRM", "Agente IA", "Dashboards"],
+    en: ["CRM", "AI agent", "Dashboards"],
+  },
+  consultoria: {
+    es: ["Workshop", "Proceso", "Insights"],
+    en: ["Workshop", "Process", "Insights"],
+  },
 };
 
-const modules: Record<FallbackType, string[]> = {
-  kanban: ["Dashboard principal", "Scrumboard o tablero de sprints", "Vista de proyectos"],
-  ecommerce: ["Landing o tienda", "Catalogo de productos", "Dashboard comercial"],
-  marketing: ["Campanas", "Calendario de publicaciones", "Reportes o metricas"],
-  hr: ["Panel de empleados", "Control de asistencia", "Reportes laborales"],
-  dashboard: ["CRM personalizado", "Agente IA atencion 24/7", "Dashboards inteligentes"],
-  consultoria: ["Workshop", "Proceso", "Insights"],
+const modules = {
+  kanban: {
+    es: ["Dashboard principal", "Scrumboard o tablero de sprints", "Vista de proyectos"],
+    en: ["Executive dashboard", "Scrum board", "Project view"],
+  },
+  ecommerce: {
+    es: ["Landing o tienda", "Catalogo de productos", "Dashboard comercial"],
+    en: ["Storefront", "Product catalog", "Commercial dashboard"],
+  },
+  marketing: {
+    es: ["Campanas", "Calendario de publicaciones", "Reportes o metricas"],
+    en: ["Campaigns", "Publishing calendar", "Reports and metrics"],
+  },
+  hr: {
+    es: ["Panel de empleados", "Control de asistencia", "Reportes laborales"],
+    en: ["Employee panel", "Attendance control", "Workforce reports"],
+  },
+  dashboard: {
+    es: ["CRM personalizado", "Agente IA atencion 24/7", "Dashboards inteligentes"],
+    en: ["Custom CRM", "24/7 AI agent", "Smart dashboards"],
+  },
+  consultoria: {
+    es: ["Workshop", "Proceso", "Insights"],
+    en: ["Workshop", "Process", "Insights"],
+  },
 };
 
 export function PlatformMockup({
@@ -35,7 +73,8 @@ export function PlatformMockup({
   mode = "card",
   title,
 }: PlatformMockupProps) {
-  const currentModules = modules[fallbackType];
+  const { locale } = useI18n();
+  const currentModules = modules[fallbackType][locale];
   const isConsultoria = fallbackType === "consultoria";
 
   return (
@@ -47,7 +86,7 @@ export function PlatformMockup({
         <span />
       </div>
       <div className="platform-mockup__chips">
-        {labels[fallbackType].map((label) => (
+        {labels[fallbackType][locale].map((label) => (
           <span key={label}>{label}</span>
         ))}
       </div>

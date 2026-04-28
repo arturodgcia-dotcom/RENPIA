@@ -1,10 +1,13 @@
-import type { NewsItem } from "../data/siteContent";
+import type { BlogPost } from "../data/blogPosts";
+import type { SupportedLocale } from "../i18n/types";
+import { Button } from "./Button";
 
 type NewsCardProps = {
-  item: NewsItem;
+  item: BlogPost;
+  locale: SupportedLocale;
 };
 
-export function NewsCard({ item }: NewsCardProps) {
+export function NewsCard({ item, locale }: NewsCardProps) {
   return (
     <article className="news-card">
       <div className="news-card__image">
@@ -21,10 +24,13 @@ export function NewsCard({ item }: NewsCardProps) {
           <span />
         </div>
       </div>
-      <small className="news-card__date">{item.date}</small>
-      <span className="news-card__category">{item.category}</span>
-      <h3>{item.title}</h3>
-      <p>{item.description}</p>
+      <small className="news-card__date">{item.publishedAt}</small>
+      <span className="news-card__category">{item.category[locale]}</span>
+      <h3>{item.title[locale]}</h3>
+      <p>{item.excerpt[locale]}</p>
+      <Button href={`/blog/${item.slug}`} variant="ghost">
+        {locale === "es" ? "Leer articulo" : "Read article"}
+      </Button>
     </article>
   );
 }

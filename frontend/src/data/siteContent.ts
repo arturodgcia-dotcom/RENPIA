@@ -1,186 +1,395 @@
-export type Product = {
+import type { LocalizedText } from "../i18n/types";
+
+export type SolutionSlug =
+  | "sprintpilot"
+  | "comercia"
+  | "nervia"
+  | "jornadalaboral360";
+
+export type DemoSlug = "sprintpilot" | "comercia";
+
+export type Solution = {
+  slug: SolutionSlug;
   name: string;
-  description: string;
-  badge?: string;
-  audience: string;
-  highlight: string;
-  preview: "sprintpilot" | "comercia" | "nervia" | "jornada360";
+  description: LocalizedText;
+  audience: LocalizedText;
+  highlight: LocalizedText;
+  modules: LocalizedText[];
+  benefits: LocalizedText[];
+  badge?: LocalizedText;
+  path: string;
+  proposalPath: string;
+  demoPath?: string;
 };
 
-export type DemoItem = {
-  title: string;
-  description: string;
-  badge: string;
-  preview: "sprintpilot" | "comercia";
-};
-
-export type NewsItem = {
-  title: string;
-  description: string;
-  category: string;
-  date: string;
+export type Demo = {
+  slug: DemoSlug;
+  title: LocalizedText;
+  description: LocalizedText;
+  badge: LocalizedText;
+  path: string;
 };
 
 export type FaqItem = {
-  question: string;
-  answer: string;
+  question: LocalizedText;
+  answer: LocalizedText;
 };
 
-export const heroMetrics = [
-  { label: "Ingresos", value: "+32.4%", tone: "cyan" },
-  { label: "Productividad", value: "+28.7%", tone: "violet" },
-  { label: "Tiempo de ciclo", value: "-41%", tone: "emerald" },
-  { label: "Automatizaciones activas", value: "24", tone: "cyan" },
-  { label: "Agentes IA activos", value: "12", tone: "violet" },
-  { label: "Procesos optimizados", value: "58", tone: "emerald" },
-] as const;
+export type TeamMember = {
+  slug: "arturo" | "isa" | "available";
+  name: string;
+  role: LocalizedText;
+};
 
-export const whatWeDo = [
+export const solutions: Solution[] = [
   {
-    title: "Consultoria estrategica",
-    text: "Traducimos objetivos de negocio en hojas de ruta accionables con prioridades, riesgos y oportunidades claras.",
-  },
-  {
-    title: "Reingenieria de procesos",
-    text: "Redisenamos la operacion para eliminar fricciones, acelerar ciclos y mejorar la trazabilidad de punta a punta.",
-  },
-  {
-    title: "Automatizacion con IA",
-    text: "Orquestamos agentes, flujos, analitica y automatizaciones que liberan tiempo y elevan la capacidad del equipo.",
-  },
-  {
-    title: "Desarrollo de sistemas a la medida",
-    text: "Construimos software alineado a procesos, sectores y metas especificas cuando el negocio necesita algo unico.",
-  },
-] as const;
-
-export const products: Product[] = [
-  {
+    slug: "sprintpilot",
     name: "SprintPilot",
-    description:
-      "Plataforma para gestion agil, seguimiento de proyectos, tableros, sprints y operacion con vision ejecutiva.",
-    badge: "Demo disponible",
-    audience: "Operacion y direccion",
-    highlight: "Tableros + seguimiento",
-    preview: "sprintpilot",
+    description: {
+      es: "Plataforma para gestion agil, seguimiento de proyectos, tableros, backlog y operacion basada en objetivos.",
+      en: "Platform for agile management, project tracking, sprint boards, backlogs and goal-based execution.",
+    },
+    audience: {
+      es: "Operacion y direccion",
+      en: "Operations and leadership",
+    },
+    highlight: {
+      es: "Gestion agil con foco ejecutivo",
+      en: "Agile execution with executive visibility",
+    },
+    modules: [
+      {
+        es: "Dashboard principal",
+        en: "Executive dashboard",
+      },
+      {
+        es: "Scrumboard o tablero de sprints",
+        en: "Scrum board and sprint workspace",
+      },
+      {
+        es: "Vista de proyectos",
+        en: "Project portfolio view",
+      },
+    ],
+    benefits: [
+      {
+        es: "Mayor trazabilidad por sprint y por iniciativa",
+        en: "Better visibility by sprint and initiative",
+      },
+      {
+        es: "Seguimiento de objetivos, backlog y velocidad del equipo",
+        en: "Track objectives, backlog and team velocity",
+      },
+      {
+        es: "Paneles claros para operacion y direccion",
+        en: "Clear dashboards for operations and leadership",
+      },
+    ],
+    badge: {
+      es: "Demo disponible",
+      en: "Demo available",
+    },
+    path: "/solutions/sprintpilot",
+    proposalPath: "/#contacto",
+    demoPath: "/demo/sprintpilot",
   },
   {
+    slug: "comercia",
     name: "ComerCia",
-    description:
-      "Ecosistema de comercio digital para marcas y empresas con enfoque en ventas, catalogos, operaciones y crecimiento.",
-    badge: "Demo disponible",
-    audience: "Comercial y growth",
-    highlight: "Ventas + catalogos",
-    preview: "comercia",
+    description: {
+      es: "Plataforma de ecommerce y marketplace para ventas online, catalogos, operacion comercial y crecimiento digital.",
+      en: "Ecommerce and marketplace platform for online sales, product catalogs, commercial operations and digital growth.",
+    },
+    audience: {
+      es: "Comercial y growth",
+      en: "Sales and growth",
+    },
+    highlight: {
+      es: "Canales digitales con control comercial",
+      en: "Digital channels with commercial control",
+    },
+    modules: [
+      {
+        es: "Landing o tienda",
+        en: "Storefront or landing store",
+      },
+      {
+        es: "Catalogo de productos",
+        en: "Product catalog",
+      },
+      {
+        es: "Dashboard comercial",
+        en: "Commercial dashboard",
+      },
+    ],
+    benefits: [
+      {
+        es: "Operacion centralizada para ventas, pedidos y clientes",
+        en: "Centralized operations for sales, orders and customers",
+      },
+      {
+        es: "Catalogos visuales con enfoque en conversion",
+        en: "Visual catalogs built for conversion",
+      },
+      {
+        es: "Analitica comercial para decisiones rapidas",
+        en: "Commercial analytics for faster decisions",
+      },
+    ],
+    badge: {
+      es: "Demo disponible",
+      en: "Demo available",
+    },
+    path: "/solutions/comercia",
+    proposalPath: "/#contacto",
+    demoPath: "/demo/comercia",
   },
   {
+    slug: "nervia",
     name: "Nervia",
-    description:
-      "Plataforma para estrategia de marketing, campanas, contenido, automatizacion y crecimiento comercial con IA.",
-    audience: "Marketing inteligente",
-    highlight: "Contenido + automatizacion",
-    preview: "nervia",
+    description: {
+      es: "Plataforma para estrategia y automatizacion de marketing, campanas, contenido, analitica y apoyo con IA.",
+      en: "Platform for marketing strategy and automation, campaigns, content, analytics and AI-assisted execution.",
+    },
+    audience: {
+      es: "Marketing y crecimiento",
+      en: "Marketing and growth",
+    },
+    highlight: {
+      es: "Contenido, campanas y analitica con IA",
+      en: "Content, campaigns and analytics with AI",
+    },
+    modules: [
+      {
+        es: "Campanas",
+        en: "Campaigns",
+      },
+      {
+        es: "Calendario de publicaciones",
+        en: "Publishing calendar",
+      },
+      {
+        es: "Reportes o metricas",
+        en: "Reports and metrics",
+      },
+    ],
+    benefits: [
+      {
+        es: "Planeacion de marketing con visibilidad multicanal",
+        en: "Marketing planning with multichannel visibility",
+      },
+      {
+        es: "Automatizacion de tareas repetitivas y seguimiento",
+        en: "Automate repetitive tasks and follow-up",
+      },
+      {
+        es: "Metricas claras para tomar decisiones comerciales",
+        en: "Clear metrics for commercial decisions",
+      },
+    ],
+    path: "/solutions/nervia",
+    proposalPath: "/#contacto",
   },
   {
+    slug: "jornadalaboral360",
     name: "JornadaLaboral360",
-    description:
-      "Solucion para control laboral, seguimiento operativo, gestion del personal y procesos de RH.",
-    audience: "RH y operacion",
-    highlight: "Control + talento",
-    preview: "jornada360",
+    description: {
+      es: "Solucion para gestion laboral, empleados, jornadas, cumplimiento, control operativo y administracion empresarial.",
+      en: "Solution for workforce management, employees, schedules, compliance, operational control and business administration.",
+    },
+    audience: {
+      es: "RH y operacion",
+      en: "HR and operations",
+    },
+    highlight: {
+      es: "Control laboral con cumplimiento y trazabilidad",
+      en: "Workforce control with compliance and traceability",
+    },
+    modules: [
+      {
+        es: "Panel de empleados",
+        en: "Employee panel",
+      },
+      {
+        es: "Control de asistencia",
+        en: "Attendance control",
+      },
+      {
+        es: "Reportes laborales",
+        en: "Workforce reporting",
+      },
+    ],
+    benefits: [
+      {
+        es: "Monitoreo operativo y cumplimiento por area",
+        en: "Operational monitoring and compliance by area",
+      },
+      {
+        es: "Registros claros para asistencia y jornadas",
+        en: "Clear attendance and shift records",
+      },
+      {
+        es: "Informacion util para direccion y RH",
+        en: "Useful insights for leadership and HR",
+      },
+    ],
+    path: "/solutions/jornadalaboral360",
+    proposalPath: "/#contacto",
   },
 ];
 
-export const customDevelopmentItems = [
-  "CRM y gestion comercial",
-  "Portales y extranet",
-  "Marketplaces y e-commerce",
-  "Dashboards ejecutivos",
-  "Agentes de IA personalizados",
-  "Automatizacion de atencion",
-  "Integraciones Google Suite",
-  "Integraciones con sistemas empresariales",
-] as const;
-
-export const demos: DemoItem[] = [
+export const demos: Demo[] = [
   {
-    title: "Demo SprintPilot",
-    description: "Vista ejecutiva para sprints, proyectos, seguimiento operativo y control de avance.",
-    badge: "Disponible ahora",
-    preview: "sprintpilot",
+    slug: "sprintpilot",
+    title: {
+      es: "Demo SprintPilot",
+      en: "SprintPilot demo",
+    },
+    description: {
+      es: "Explora seguimiento agil, scrumboard, backlog y metricas ejecutivas en un entorno demostrativo.",
+      en: "Explore agile tracking, scrum board, backlog and executive metrics in a guided demo environment.",
+    },
+    badge: {
+      es: "Disponible ahora",
+      en: "Available now",
+    },
+    path: "/demo/sprintpilot",
   },
   {
-    title: "Demo ComerCia",
-    description: "Recorre pipeline comercial, catalogos, ritmo de conversion y operacion digital conectada.",
-    badge: "Disponible ahora",
-    preview: "comercia",
-  },
-];
-
-export const newsItems: NewsItem[] = [
-  {
-    title: "Como la IA esta redefiniendo la productividad empresarial",
-    description: "De asistentes operativos a agentes especializados: el impacto ya se mide en velocidad, foco y capacidad.",
-    category: "Productividad",
-    date: "28 abril 2026",
-  },
-  {
-    title: "Ventajas competitivas de automatizar procesos con IA",
-    description: "Automatizar no es solo ahorrar tiempo; es responder mejor, vender antes y operar con menos perdida.",
-    category: "Automatizacion",
-    date: "27 abril 2026",
-  },
-  {
-    title: "Tendencias de agentes inteligentes para empresas",
-    description: "Los equipos estan adoptando agentes conectados a datos, calendarios, ventas y servicio para ganar contexto.",
-    category: "Agentes IA",
-    date: "26 abril 2026",
-  },
-  {
-    title: "IA aplicada a comercio, marketing y operacion interna",
-    description: "La ventaja surge cuando marketing, ventas y operacion trabajan con una misma capa de inteligencia.",
-    category: "Transformacion digital",
-    date: "25 abril 2026",
+    slug: "comercia",
+    title: {
+      es: "Demo ComerCia",
+      en: "ComerCia demo",
+    },
+    description: {
+      es: "Recorre catalogo, pedidos, dashboard comercial y experiencia de tienda en una vista funcional.",
+      en: "Walk through the catalog, orders, commercial dashboard and store experience in a functional demo view.",
+    },
+    badge: {
+      es: "Disponible ahora",
+      en: "Available now",
+    },
+    path: "/demo/comercia",
   },
 ];
-
-export const agendaOptions = [
-  "Llamada de diagnostico",
-  "Demo SprintPilot",
-  "Demo ComerCia",
-  "Cotizacion para desarrollo a la medida",
-  "Videollamada",
-] as const;
 
 export const faqItems: FaqItem[] = [
   {
-    question: "Que hace RENPIA?",
-    answer:
-      "RENPIA ayuda a empresas a mejorar procesos, ventas, servicio y crecimiento con consultoria, automatizacion, agentes de IA y software a la medida.",
+    question: {
+      es: "Que hace REINPIA?",
+      en: "What does REINPIA do?",
+    },
+    answer: {
+      es: "REINPIA ayuda a empresas a mejorar procesos, ventas, servicio y crecimiento con consultoria, automatizacion, agentes de IA y software a la medida.",
+      en: "REINPIA helps companies improve processes, sales, service and growth through consulting, automation, AI agents and custom software.",
+    },
   },
   {
-    question: "Que tipo de soluciones desarrolla?",
-    answer:
-      "Desarrolla plataformas propias, automatizaciones, integraciones, dashboards ejecutivos, agentes personalizados y sistemas hechos para procesos especificos.",
+    question: {
+      es: "Que tipo de soluciones desarrolla?",
+      en: "What kinds of solutions does REINPIA build?",
+    },
+    answer: {
+      es: "Desarrolla plataformas propias, automatizaciones, dashboards, integraciones, agentes personalizados y sistemas hechos para procesos especificos.",
+      en: "It builds proprietary platforms, automations, dashboards, integrations, custom AI agents and systems designed for specific business processes.",
+    },
   },
   {
-    question: "Puedo comprar una plataforma por separado?",
-    answer:
-      "Si. Soluciones como SprintPilot y ComerCia pueden presentarse como productos independientes, ademas de formar parte de una estrategia integral.",
+    question: {
+      es: "Puedo comprar una plataforma por separado?",
+      en: "Can I buy a platform separately?",
+    },
+    answer: {
+      es: "Si. Soluciones como SprintPilot y ComerCia pueden contratarse como productos independientes o como parte de una estrategia integral.",
+      en: "Yes. Solutions such as SprintPilot and ComerCia can be acquired as standalone products or as part of a broader transformation strategy.",
+    },
   },
   {
-    question: "RENPIA desarrolla sistemas personalizados?",
-    answer:
-      "Si. Cuando el negocio necesita una operacion unica, RENPIA disena y construye software a la medida con enfoque estrategico y operativo.",
+    question: {
+      es: "REINPIA desarrolla sistemas personalizados?",
+      en: "Does REINPIA build custom systems?",
+    },
+    answer: {
+      es: "Si. Cuando el negocio necesita una operacion unica, REINPIA disena y construye software a la medida con enfoque estrategico y operativo.",
+      en: "Yes. When a business needs a unique operation, REINPIA designs and builds custom software with a strategic and operational focus.",
+    },
   },
   {
-    question: "Que demos estan disponibles?",
-    answer:
-      "Actualmente la landing destaca las demos de SprintPilot y ComerCia como puntos de entrada para conocer el ecosistema RENPIA.",
+    question: {
+      es: "Que demos estan disponibles?",
+      en: "Which demos are available?",
+    },
+    answer: {
+      es: "Actualmente estan disponibles las demos de SprintPilot y ComerCia como puertas de entrada al ecosistema REINPIA.",
+      en: "SprintPilot and ComerCia demos are currently available as entry points into the REINPIA ecosystem.",
+    },
   },
   {
-    question: "Como ayuda la IA a mi empresa?",
-    answer:
-      "La IA ayuda a acelerar tareas, mejorar seguimiento, enriquecer decisiones, automatizar atencion y reducir tiempos de ciclo con mayor consistencia.",
+    question: {
+      es: "Como ayuda la IA a mi empresa?",
+      en: "How can AI help my company?",
+    },
+    answer: {
+      es: "La IA ayuda a acelerar tareas, enriquecer decisiones, automatizar seguimiento, mejorar la atencion y reducir tiempos de ciclo con mayor consistencia.",
+      en: "AI helps accelerate tasks, enrich decision-making, automate follow-up, improve service and reduce cycle time with greater consistency.",
+    },
   },
-] as const;
+];
+
+export const appointmentReasons: LocalizedText[] = [
+  {
+    es: "Llamada de diagnostico",
+    en: "Discovery call",
+  },
+  {
+    es: "Demo SprintPilot",
+    en: "SprintPilot demo",
+  },
+  {
+    es: "Demo ComerCia",
+    en: "ComerCia demo",
+  },
+  {
+    es: "Cotizacion para desarrollo a la medida",
+    en: "Custom development quote",
+  },
+  {
+    es: "Videollamada",
+    en: "Video call",
+  },
+];
+
+export const teamMembers: TeamMember[] = [
+  {
+    slug: "arturo",
+    name: "Arturo",
+    role: {
+      es: "Diagnostico, arquitectura y desarrollo",
+      en: "Discovery, architecture and development",
+    },
+  },
+  {
+    slug: "isa",
+    name: "Isa",
+    role: {
+      es: "Demos, seguimiento y relacion comercial",
+      en: "Demos, follow-up and commercial relationship",
+    },
+  },
+  {
+    slug: "available",
+    name: "Disponible",
+    role: {
+      es: "Asignacion automatica segun disponibilidad",
+      en: "Automatic assignment based on availability",
+    },
+  },
+];
+
+export function getSolutionBySlug(slug: string) {
+  return solutions.find((solution) => solution.slug === slug);
+}
+
+export function getDemoBySlug(slug: string) {
+  return demos.find((demo) => demo.slug === slug);
+}

@@ -1,20 +1,20 @@
 import { ProductCard } from "../components/ProductCard";
-import { products } from "../data/siteContent";
+import { solutions } from "../data/siteContent";
+import { useI18n } from "../i18n/I18nProvider";
 
 export function ProductsSection() {
+  const { content } = useI18n();
+
   return (
     <section className="landing-section landing-section--airy landing-section--products" id="soluciones">
       <div className="section-heading">
-        <p className="section-heading__eyebrow">Nuestros desarrollos</p>
-        <h2>Soluciones con identidad propia para diferentes frentes del negocio.</h2>
-        <p className="section-heading__description">
-          Cada desarrollo RENPIA parte de una logica real de operacion, crecimiento y seguimiento,
-          con una presentacion clara y moderna para empresas que necesitan avanzar.
-        </p>
+        <p className="section-heading__eyebrow">{content.solutions.eyebrow}</p>
+        <h2>{content.solutions.title}</h2>
+        <p className="section-heading__description">{content.solutions.description}</p>
       </div>
 
       <div className="product-grid">
-        {products.map((product) => (
+        {solutions.map((product) => (
           <ProductCard key={product.name} product={product} />
         ))}
       </div>

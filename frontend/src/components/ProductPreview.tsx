@@ -29,6 +29,8 @@ export function ProductPreview({
           className="product-preview__image"
           src={image}
           alt={alt ?? title}
+          loading={mode === "hero" ? "eager" : "lazy"}
+          decoding="async"
           onError={() => setHasError(true)}
         />
       ) : (

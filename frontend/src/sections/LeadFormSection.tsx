@@ -1,89 +1,70 @@
 import { FormEvent, useMemo, useState } from "react";
 import { Button } from "../components/Button";
+import { useI18n } from "../i18n/I18nProvider";
+import { scoreLead, type LeadFormInput } from "../services/leadScoring";
+import { submitLead } from "../services/leadService";
 
-type LeadFormData = {
-  fullName: string;
-  company: string;
-  position: string;
-  email: string;
-  whatsapp: string;
-  companyType: string;
-  mainNeed: string;
-  budget: string;
-  solutionType: string;
-  implementationTime: string;
-  challenge: string;
-  verification: string;
-  honeypot: string;
-};
-
-const initialForm: LeadFormData = {
+const initialForm: LeadFormInput = {
   fullName: "",
   company: "",
   position: "",
   email: "",
   whatsapp: "",
   companyType: "",
+  companySize: "",
   mainNeed: "",
   budget: "",
-  solutionType: "",
   implementationTime: "",
   challenge: "",
   verification: "",
+  consent: false,
   honeypot: "",
 };
 
-const freeDomains = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com", "icloud.com"];
-
-function isBusinessEmail(email: string) {
-  const domain = email.split("@")[1]?.toLowerCase() ?? "";
-  return Boolean(domain) && !freeDomains.includes(domain);
-}
-
-function classifyProspect(form: LeadFormData) {
-  let score = 0;
-
-  if (form.company.trim()) score += 15;
-  if (isBusinessEmail(form.email)) score += 20;
-  if (form.whatsapp.trim().length >= 10) score += 10;
-  if (form.budget.trim()) score += 15;
-  if (form.mainNeed.trim().length >= 12) score += 15;
-  if (form.challenge.trim().length >= 40) score += 15;
-  if (["Inmediato", "1 a 3 meses"].includes(form.implementationTime)) score += 10;
-
-  if (score >= 75) return "Prospecto potencial alto";
-  if (score >= 50) return "Prospecto potencial medio";
-  return "Prospecto en exploracion";
-}
+const THROTTLE_KEY = "reinpia-last-lead-submission";
+const THROTTLE_MS = 30 * 1000;
 
 export function LeadFormSection() {
-  const [form, setForm] = useState<LeadFormData>(initialForm);
+  const { locale, content } = useI18n();
+  const [form, setForm] = useState<LeadFormInput>(initialForm);
   const [feedback, setFeedback] = useState("");
+  const scoring = useMemo(() => scoreLead(form), [form]);
 
-  const businessEmail = useMemo(() => isBusinessEmail(form.email), [form.email]);
-  const verificationOk = form.verification.trim() === "7";
-  const automaticClassification = useMemo(() => classifyProspect(form), [form]);
-  const antiBotOk = !form.honeypot.trim();
-
-  function updateField<K extends keyof LeadFormData>(field: K, value: LeadFormData[K]) {
+  function updateField<K extends keyof LeadFormInput>(field: K, value: LeadFormInput[K]) {
     setForm((current) => ({ ...current, [field]: value }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!businessEmail) {
-      setFeedback("Necesitamos un correo empresarial para continuar.");
+    const lastSubmittedAt = Number(window.localStorage.getItem(THROTTLE_KEY) ?? "0");
+    if (Date.now() - lastSubmittedAt < THROTTLE_MS) {
+      setFeedback(content.leadForm.throttled);
       return;
     }
 
-    if (!verificationOk || !antiBotOk) {
-      setFeedback("La validacion de seguridad no fue aprobada.");
+    if (!scoring.businessEmail) {
+      setFeedback(content.leadForm.invalidBusinessEmail);
       return;
     }
 
+    if (!scoring.verificationOk || !scoring.antiBotOk) {
+      setFeedback(content.leadForm.invalidVerification);
+      return;
+    }
+
+    if (!form.consent) {
+      setFeedback(content.leadForm.invalidConsent);
+      return;
+    }
+
+    const result = await submitLead(form);
+    window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
     setFeedback(
-      `Solicitud lista para enviarse en la siguiente fase. Clasificacion actual: ${automaticClassification}.`,
+      `${content.leadForm.success} | Score: ${result.scoring.score} | ${getClassificationLabel(
+        result.scoring.classification,
+        content.leadForm.classes,
+      )}`,
     );
     setForm(initialForm);
   }
@@ -93,45 +74,42 @@ export function LeadFormSection() {
       <div className="prospect-layout">
         <div className="prospect-layout__form">
           <div className="section-heading">
-            <p className="section-heading__eyebrow">Formulario inteligente para prospectos</p>
-            <h2>Formulario inteligente para prospectos</h2>
-            <p className="section-heading__description">
-              Captura informacion estrategica para entender necesidad, prioridad y tipo de
-              solucion que requiere tu empresa.
-            </p>
+            <p className="section-heading__eyebrow">{content.leadForm.eyebrow}</p>
+            <h2>{content.leadForm.title}</h2>
+            <p className="section-heading__description">{content.leadForm.description}</p>
           </div>
 
           <form className="prospect-form" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Nombre completo"
+              placeholder={content.leadForm.fields.fullName}
               value={form.fullName}
               onChange={(event) => updateField("fullName", event.target.value)}
               required
             />
             <input
               type="text"
-              placeholder="Empresa"
+              placeholder={content.leadForm.fields.company}
               value={form.company}
               onChange={(event) => updateField("company", event.target.value)}
               required
             />
             <input
               type="text"
-              placeholder="Cargo"
+              placeholder={content.leadForm.fields.position}
               value={form.position}
               onChange={(event) => updateField("position", event.target.value)}
             />
             <input
               type="email"
-              placeholder="Correo empresarial"
+              placeholder={content.leadForm.fields.email}
               value={form.email}
               onChange={(event) => updateField("email", event.target.value)}
               required
             />
             <input
               type="tel"
-              placeholder="WhatsApp"
+              placeholder={content.leadForm.fields.whatsapp}
               value={form.whatsapp}
               onChange={(event) => updateField("whatsapp", event.target.value)}
               required
@@ -141,17 +119,24 @@ export function LeadFormSection() {
               onChange={(event) => updateField("companyType", event.target.value)}
               required
             >
-              <option value="">Tipo de empresa</option>
-              <option>PyME</option>
-              <option>Corporativo</option>
-              <option>Startup</option>
-              <option>Industria / manufactura</option>
-              <option>Comercio / retail</option>
-              <option>Servicios</option>
+              <option value="">{content.leadForm.fields.companyType}</option>
+              {content.leadForm.options.companyTypes.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+            <select
+              value={form.companySize}
+              onChange={(event) => updateField("companySize", event.target.value)}
+              required
+            >
+              <option value="">{content.leadForm.fields.companySize}</option>
+              {content.leadForm.options.companySizes.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
             </select>
             <input
               type="text"
-              placeholder="Principal necesidad"
+              placeholder={content.leadForm.fields.mainNeed}
               value={form.mainNeed}
               onChange={(event) => updateField("mainNeed", event.target.value)}
               required
@@ -161,44 +146,32 @@ export function LeadFormSection() {
               onChange={(event) => updateField("budget", event.target.value)}
               required
             >
-              <option value="">Presupuesto estimado</option>
-              <option>Hasta 50 mil MXN</option>
-              <option>50 mil a 150 mil MXN</option>
-              <option>150 mil a 500 mil MXN</option>
-              <option>500 mil MXN o mas</option>
-            </select>
-            <select
-              value={form.solutionType}
-              onChange={(event) => updateField("solutionType", event.target.value)}
-              required
-            >
-              <option value="">Buscas comprar una solucion existente o un desarrollo a la medida?</option>
-              <option>Solucion existente</option>
-              <option>Desarrollo a la medida</option>
-              <option>Necesito diagnostico</option>
+              <option value="">{content.leadForm.fields.budget}</option>
+              {content.leadForm.options.budgets.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
             </select>
             <select
               value={form.implementationTime}
               onChange={(event) => updateField("implementationTime", event.target.value)}
               required
             >
-              <option value="">En cuanto tiempo deseas implementar?</option>
-              <option>Inmediato</option>
-              <option>1 a 3 meses</option>
-              <option>3 a 6 meses</option>
-              <option>Mas adelante</option>
+              <option value="">{content.leadForm.fields.implementationTime}</option>
+              {content.leadForm.options.timelines.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
             </select>
-            <textarea
-              placeholder="Describe brevemente tu reto"
-              value={form.challenge}
-              onChange={(event) => updateField("challenge", event.target.value)}
-              required
-            />
             <input
               type="text"
-              placeholder="Pregunta de verificacion: 3 + 4 ="
+              placeholder={content.leadForm.fields.verification}
               value={form.verification}
               onChange={(event) => updateField("verification", event.target.value)}
+              required
+            />
+            <textarea
+              placeholder={content.leadForm.fields.challenge}
+              value={form.challenge}
+              onChange={(event) => updateField("challenge", event.target.value)}
               required
             />
             <input
@@ -210,7 +183,15 @@ export function LeadFormSection() {
               autoComplete="off"
               aria-hidden="true"
             />
-            <Button type="submit">Quiero mi diagnostico</Button>
+            <label className="consent-check">
+              <input
+                type="checkbox"
+                checked={form.consent}
+                onChange={(event) => updateField("consent", event.target.checked)}
+              />
+              <span>{content.leadForm.fields.consent}</span>
+            </label>
+            <Button type="submit">{content.leadForm.button}</Button>
           </form>
 
           {feedback ? <p className="form-feedback">{feedback}</p> : null}
@@ -218,27 +199,45 @@ export function LeadFormSection() {
 
         <aside className="prospect-layout__security">
           <div className="security-card">
-            <p className="security-card__eyebrow">Filtro de seguridad para prospectos reales</p>
-            <h3>Validacion previa</h3>
+            <p className="security-card__eyebrow">{content.leadForm.securityEyebrow}</p>
+            <h3>{content.leadForm.securityTitle}</h3>
             <ul className="security-checks">
-              <li className={businessEmail ? "is-valid" : ""}>Correo empresarial requerido</li>
-              <li className={antiBotOk ? "is-valid" : ""}>Validacion anti-bot</li>
-              <li className={verificationOk ? "is-valid" : ""}>Pregunta de verificacion</li>
-              <li className="is-highlighted">{automaticClassification}</li>
+              <li className={scoring.businessEmail ? "is-valid" : ""}>
+                {content.leadForm.securityChecks.businessEmail}
+              </li>
+              <li className={scoring.antiBotOk ? "is-valid" : ""}>
+                {content.leadForm.securityChecks.antiBot}
+              </li>
+              <li className={scoring.verificationOk ? "is-valid" : ""}>
+                {content.leadForm.securityChecks.verification}
+              </li>
+              <li className={form.consent ? "is-valid" : ""}>
+                {content.leadForm.securityChecks.consent}
+              </li>
+              <li className="is-highlighted">
+                {getClassificationLabel(scoring.classification, content.leadForm.classes)}
+              </li>
             </ul>
 
             <div className="security-card__note">
-              <span>Clasificacion automatica de prospecto</span>
-              <strong>{automaticClassification}</strong>
+              <span>{locale === "es" ? "Lead score" : "Lead score"}</span>
+              <strong>{scoring.score}</strong>
             </div>
 
             <div className="security-card__mini">
-              <span>Validacion activa</span>
-              <strong>Prospectos empresariales priorizados</strong>
+              <span>{locale === "es" ? "Clasificacion automatica" : "Automatic classification"}</span>
+              <strong>{getClassificationLabel(scoring.classification, content.leadForm.classes)}</strong>
             </div>
           </div>
         </aside>
       </div>
     </section>
   );
+}
+
+function getClassificationLabel(
+  classification: "curious" | "initial" | "potential" | "expansion",
+  labels: Record<"curious" | "initial" | "potential" | "expansion", string>,
+) {
+  return labels[classification];
 }

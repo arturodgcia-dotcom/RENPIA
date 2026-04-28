@@ -1,46 +1,53 @@
 import { Button } from "../components/Button";
 import { ProductPreview } from "../components/ProductPreview";
-import { customDevelopmentItems } from "../data/siteContent";
+import { siteAssets } from "../config/siteAssets";
+import { useI18n } from "../i18n/I18nProvider";
 
 export function CustomDevelopmentSection() {
+  const { locale, content } = useI18n();
+
   return (
     <section className="landing-section landing-section--feature" id="desarrollo-medida">
       <div className="custom-layout">
         <div className="custom-layout__copy">
           <div className="section-heading">
-            <p className="section-heading__eyebrow">Desarrollo a la medida</p>
-            <h2>
-              Si tu empresa necesita algo unico, en RENPIA disenamos y construimos soluciones
-              personalizadas.
-            </h2>
-            <p className="section-heading__description">
-              Pensamos sistemas desde el proceso, la experiencia del equipo y la necesidad del
-              negocio. Eso permite construir plataformas mas utiles, conectadas y sostenibles.
-            </p>
+            <p className="section-heading__eyebrow">{content.customDevelopment.eyebrow}</p>
+            <h2>{content.customDevelopment.title}</h2>
+            <p className="section-heading__description">{content.customDevelopment.description}</p>
           </div>
 
           <ul className="check-list">
-            {customDevelopmentItems.map((item) => (
+            {content.customDevelopment.capabilities.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
 
-          <Button href="#formulario">Solicitar solucion a la medida</Button>
+          <Button href="#formulario">{content.customDevelopment.cta}</Button>
         </div>
 
         <aside className="custom-layout__panel">
           <div className="custom-panel">
             <ProductPreview
-              image="/renpia-assets/desarrollo-medida.png"
+              image={siteAssets.solutions.customDevelopment}
               fallbackType="dashboard"
-              title="Desarrollo a la medida"
+              title={content.customDevelopment.eyebrow}
               mode="laptop"
             />
-            <div className="custom-panel__floating custom-panel__floating--one">CRM personalizado</div>
-            <div className="custom-panel__floating custom-panel__floating--two">Agente IA Atencion 24/7</div>
-            <div className="custom-panel__floating custom-panel__floating--three">Integraciones Google Suite</div>
-            <div className="custom-panel__floating custom-panel__floating--four">Marketplace B2B/B2C</div>
-            <div className="custom-panel__floating custom-panel__floating--five">Dashboards inteligentes</div>
+            <div className="custom-panel__floating custom-panel__floating--one">
+              {locale === "es" ? "CRM personalizado" : "Custom CRM"}
+            </div>
+            <div className="custom-panel__floating custom-panel__floating--two">
+              {locale === "es" ? "Agente IA 24/7" : "24/7 AI agent"}
+            </div>
+            <div className="custom-panel__floating custom-panel__floating--three">
+              {locale === "es" ? "Integraciones Google Suite" : "Google Suite integrations"}
+            </div>
+            <div className="custom-panel__floating custom-panel__floating--four">
+              Marketplace B2B/B2C
+            </div>
+            <div className="custom-panel__floating custom-panel__floating--five">
+              {locale === "es" ? "Dashboards inteligentes" : "Smart dashboards"}
+            </div>
           </div>
         </aside>
       </div>

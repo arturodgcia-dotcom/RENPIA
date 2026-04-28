@@ -1,27 +1,19 @@
 import { Button } from "../components/Button";
-
-const menuItems = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#soluciones", label: "Soluciones" },
-  { href: "#demos", label: "Demos" },
-  { href: "#noticias", label: "Noticias IA" },
-  { href: "#desarrollo-medida", label: "Desarrollo a la medida" },
-  { href: "#contacto", label: "Contacto" },
-] as const;
+import { BrandLogo } from "../components/common/BrandLogo";
+import { LanguageSwitch } from "../components/common/LanguageSwitch";
+import { useI18n } from "../i18n/I18nProvider";
 
 export function Header() {
+  const { content } = useI18n();
+
   return (
     <header className="site-header">
-      <a className="brand-lockup" href="#inicio" aria-label="RENPIA inicio">
-        <span className="brand-lockup__mark">R</span>
-        <span>
-          <strong>RENPIA</strong>
-          <small>Reingenieria + IA</small>
-        </span>
+      <a href="/#inicio" aria-label="REINPIA inicio">
+        <BrandLogo />
       </a>
 
       <nav className="site-nav" aria-label="Principal">
-        {menuItems.map((item) => (
+        {content.nav.menu.map((item) => (
           <a key={item.label} href={item.href}>
             {item.label}
           </a>
@@ -29,10 +21,11 @@ export function Header() {
       </nav>
 
       <div className="site-header__actions">
-        <Button href="#formulario" variant="secondary">
-          Solicitar diagnostico
+        <LanguageSwitch />
+        <Button href="/#formulario" variant="secondary">
+          {content.nav.primaryCta}
         </Button>
-        <Button href="#agenda">Agendar demo</Button>
+        <Button href="/#agenda">{content.nav.secondaryCta}</Button>
       </div>
     </header>
   );

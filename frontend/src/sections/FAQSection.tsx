@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { faqItems } from "../data/siteContent";
+import { useI18n } from "../i18n/I18nProvider";
 
 export function FAQSection() {
+  const { locale, content } = useI18n();
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section className="landing-section landing-section--surface landing-section--faq" id="faq">
       <div className="section-heading">
-        <p className="section-heading__eyebrow">FAQ SEO / AEO</p>
-        <h2>Preguntas frecuentes pensadas para visibilidad, claridad y confianza.</h2>
-        <p className="section-heading__description">
-          La landing puede responder dudas clave con un lenguaje empresarial, directo y listo para
-          estructurarse en schema FAQ.
-        </p>
+        <p className="section-heading__eyebrow">{content.faq.eyebrow}</p>
+        <h2>{content.faq.title}</h2>
+        <p className="section-heading__description">{content.faq.description}</p>
       </div>
 
       <div className="faq-grid">
@@ -29,10 +28,10 @@ export function FAQSection() {
                 type="button"
                 onClick={() => setActiveIndex(index)}
               >
-                <span>{item.question}</span>
+                <span>{item.question[locale]}</span>
                 <strong>{isActive ? "-" : "+"}</strong>
               </button>
-              <p>{item.answer}</p>
+              <p>{item.answer[locale]}</p>
             </article>
           );
         })}
