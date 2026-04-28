@@ -17,8 +17,14 @@ export function NewsletterSection() {
   }
 
   return (
-    <section className="landing-section" id="newsletter">
+    <section className="landing-section landing-section--dark" id="newsletter">
       <div className="newsletter-card">
+        <div className="newsletter-card__icon">
+          <div className="newsletter-card__envelope">
+            <span />
+          </div>
+        </div>
+
         <div className="newsletter-card__copy">
           <div className="section-heading">
             <p className="section-heading__eyebrow">Newsletter</p>

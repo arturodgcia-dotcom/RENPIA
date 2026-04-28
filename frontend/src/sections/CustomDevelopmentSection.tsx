@@ -1,4 +1,5 @@
 import { Button } from "../components/Button";
+import { ProductPreview } from "../components/ProductPreview";
 import { customDevelopmentItems } from "../data/siteContent";
 
 export function CustomDevelopmentSection() {
@@ -29,18 +30,12 @@ export function CustomDevelopmentSection() {
 
         <aside className="custom-layout__panel">
           <div className="custom-panel">
-            <span className="custom-panel__eyebrow">Arquitectura funcional</span>
-            <h3>Consultoria + sistema + automatizacion</h3>
-            <p>
-              Disenamos experiencias empresariales creibles con visuales tipo dashboard, flujos
-              conectados y una capa tecnica preparada para crecer.
-            </p>
-            <div className="custom-panel__stack">
-              <span>CRM</span>
-              <span>BI</span>
-              <span>IA</span>
-              <span>Integraciones</span>
-            </div>
+            <ProductPreview variant="nervia" mode="laptop" />
+            <div className="custom-panel__floating custom-panel__floating--one">CRM personalizado</div>
+            <div className="custom-panel__floating custom-panel__floating--two">Agente IA Atencion 24/7</div>
+            <div className="custom-panel__floating custom-panel__floating--three">Integraciones Google Suite</div>
+            <div className="custom-panel__floating custom-panel__floating--four">Marketplace B2B/B2C</div>
+            <div className="custom-panel__floating custom-panel__floating--five">Dashboards inteligentes</div>
           </div>
         </aside>
       </div>

@@ -4,18 +4,21 @@ export type Product = {
   badge?: string;
   audience: string;
   highlight: string;
+  preview: "sprintpilot" | "comercia" | "nervia" | "jornada360";
 };
 
 export type DemoItem = {
   title: string;
   description: string;
   badge: string;
+  preview: "sprintpilot" | "comercia";
 };
 
 export type NewsItem = {
   title: string;
   description: string;
   category: string;
+  date: string;
 };
 
 export type FaqItem = {
@@ -59,6 +62,7 @@ export const products: Product[] = [
     badge: "Demo disponible",
     audience: "Operacion y direccion",
     highlight: "Tableros + seguimiento",
+    preview: "sprintpilot",
   },
   {
     name: "ComerCia",
@@ -67,6 +71,7 @@ export const products: Product[] = [
     badge: "Demo disponible",
     audience: "Comercial y growth",
     highlight: "Ventas + catalogos",
+    preview: "comercia",
   },
   {
     name: "Nervia",
@@ -74,6 +79,7 @@ export const products: Product[] = [
       "Plataforma para estrategia de marketing, campanas, contenido, automatizacion y crecimiento comercial con IA.",
     audience: "Marketing inteligente",
     highlight: "Contenido + automatizacion",
+    preview: "nervia",
   },
   {
     name: "JornadaLaboral360",
@@ -81,6 +87,7 @@ export const products: Product[] = [
       "Solucion para control laboral, seguimiento operativo, gestion del personal y procesos de RH.",
     audience: "RH y operacion",
     highlight: "Control + talento",
+    preview: "jornada360",
   },
 ];
 
@@ -100,11 +107,13 @@ export const demos: DemoItem[] = [
     title: "Demo SprintPilot",
     description: "Vista ejecutiva para sprints, proyectos, seguimiento operativo y control de avance.",
     badge: "Disponible ahora",
+    preview: "sprintpilot",
   },
   {
     title: "Demo ComerCia",
     description: "Recorre pipeline comercial, catalogos, ritmo de conversion y operacion digital conectada.",
     badge: "Disponible ahora",
+    preview: "comercia",
   },
 ];
 
@@ -113,21 +122,25 @@ export const newsItems: NewsItem[] = [
     title: "Como la IA esta redefiniendo la productividad empresarial",
     description: "De asistentes operativos a agentes especializados: el impacto ya se mide en velocidad, foco y capacidad.",
     category: "Productividad",
+    date: "28 abril 2026",
   },
   {
     title: "Ventajas competitivas de automatizar procesos con IA",
     description: "Automatizar no es solo ahorrar tiempo; es responder mejor, vender antes y operar con menos perdida.",
     category: "Automatizacion",
+    date: "27 abril 2026",
   },
   {
     title: "Tendencias de agentes inteligentes para empresas",
     description: "Los equipos estan adoptando agentes conectados a datos, calendarios, ventas y servicio para ganar contexto.",
     category: "Agentes IA",
+    date: "26 abril 2026",
   },
   {
     title: "IA aplicada a comercio, marketing y operacion interna",
     description: "La ventaja surge cuando marketing, ventas y operacion trabajan con una misma capa de inteligencia.",
     category: "Transformacion digital",
+    date: "25 abril 2026",
   },
 ];
 

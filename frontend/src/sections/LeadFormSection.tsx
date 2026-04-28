@@ -231,6 +231,11 @@ export function LeadFormSection() {
               <span>Clasificacion automatica de prospecto</span>
               <strong>{automaticClassification}</strong>
             </div>
+
+            <div className="security-card__mini">
+              <span>Validacion activa</span>
+              <strong>Prospectos empresariales priorizados</strong>
+            </div>
           </div>
         </aside>
       </div>

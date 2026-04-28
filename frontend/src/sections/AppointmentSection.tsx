@@ -41,7 +41,7 @@ export function AppointmentSection() {
         <aside className="agenda-visual">
           <div className="agenda-visual__card">
             <span>Disponibilidad asistida</span>
-            <strong>Arturo + Isa</strong>
+            <strong>Arturo / Isa</strong>
             <div className="agenda-visual__calendar">
               <span>Mar</span>
               <span>Mie</span>
@@ -52,6 +52,16 @@ export function AppointmentSection() {
               <span>09:00</span>
               <span>11:30</span>
               <span>16:00</span>
+            </div>
+            <div className="agenda-visual__people">
+              <article>
+                <small>Arturo</small>
+                <strong>Diagnostico y desarrollo</strong>
+              </article>
+              <article>
+                <small>Isa</small>
+                <strong>Demos y seguimiento</strong>
+              </article>
             </div>
           </div>
         </aside>

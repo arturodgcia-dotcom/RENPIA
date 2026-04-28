@@ -1,6 +1,5 @@
 import { Button } from "../components/Button";
-import { MetricCard } from "../components/MetricCard";
-import { heroMetrics } from "../data/siteContent";
+import { HeroVisual } from "../components/HeroVisual";
 
 const bulletItems = [
   "Consultoria + desarrollo + automatizacion",
@@ -13,7 +12,10 @@ export function Hero() {
     <section className="hero" id="inicio">
       <div className="hero__copy">
         <p className="hero__eyebrow">Reingenieria de procesos con inteligencia aplicada</p>
-        <h1>Reingenieria de Procesos con Inteligencia Artificial para impulsar tu empresa</h1>
+        <h1>
+          Reingenieria de Procesos con Inteligencia Artificial para{" "}
+          <span className="hero__highlight">impulsar tu empresa</span>
+        </h1>
         <p className="hero__description">
           En RENPIA transformamos operaciones, ventas, servicio y crecimiento mediante
           consultoria estrategica, automatizacion, agentes de IA y sistemas a la medida.
@@ -33,44 +35,8 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero__panel" aria-label="Dashboard visual RENPIA">
-        <div className="hero-dashboard">
-          <div className="hero-dashboard__topbar">
-            <span className="status-dot" />
-            <span>Ecosistema RENPIA</span>
-            <strong>Vista ejecutiva</strong>
-          </div>
-
-          <div className="hero-dashboard__overview">
-            <div>
-              <small>Pulse operativo</small>
-              <strong>Decision + ejecucion</strong>
-            </div>
-            <div className="hero-dashboard__curve" />
-          </div>
-
-          <div className="hero-dashboard__metrics">
-            {heroMetrics.map((metric) => (
-              <MetricCard
-                key={metric.label}
-                label={metric.label}
-                value={metric.value}
-                tone={metric.tone}
-              />
-            ))}
-          </div>
-
-          <div className="hero-dashboard__footer">
-            <div className="mini-panel">
-              <span>Ventas</span>
-              <strong>Pipeline sincronizado</strong>
-            </div>
-            <div className="mini-panel">
-              <span>Operacion</span>
-              <strong>Alertas y seguimiento</strong>
-            </div>
-          </div>
-        </div>
+      <div className="hero__panel" aria-label="Visual RENPIA">
+        <HeroVisual />
       </div>
     </section>
   );

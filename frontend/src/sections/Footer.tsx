@@ -2,6 +2,13 @@ export function Footer() {
   return (
     <footer className="site-footer" id="footer">
       <div className="site-footer__columns">
+        <div className="site-footer__brand">
+          <div className="site-footer__brandmark">R</div>
+          <div>
+            <strong>RENPIA</strong>
+            <p>Consultoria, automatizacion y software inteligente para empresas que buscan evolucionar.</p>
+          </div>
+        </div>
         <div>
           <h3>Soluciones</h3>
           <a href="#soluciones">SprintPilot</a>
