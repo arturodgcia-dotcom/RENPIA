@@ -34,51 +34,40 @@ export function Hero() {
       </div>
 
       <div className="hero__panel" aria-label="Dashboard visual RENPIA">
-        <div className="hero-visual">
-          <div className="hero-visual__photo">
-            <div className="photo-stage">
-              <div className="photo-stage__badge">RENPIA team</div>
-              <div className="photo-stage__person photo-stage__person--left" />
-              <div className="photo-stage__person photo-stage__person--right" />
-              <div className="photo-stage__desk" />
-            </div>
+        <div className="hero-dashboard">
+          <div className="hero-dashboard__topbar">
+            <span className="status-dot" />
+            <span>Ecosistema RENPIA</span>
+            <strong>Vista ejecutiva</strong>
           </div>
 
-          <div className="hero-dashboard">
-            <div className="hero-dashboard__topbar">
-              <span className="status-dot" />
-              <span>Ecosistema RENPIA</span>
-              <strong>Vista ejecutiva</strong>
+          <div className="hero-dashboard__overview">
+            <div>
+              <small>Pulse operativo</small>
+              <strong>Decision + ejecucion</strong>
             </div>
+            <div className="hero-dashboard__curve" />
+          </div>
 
-            <div className="hero-dashboard__overview">
-              <div>
-                <small>Pulse operativo</small>
-                <strong>Decision + ejecucion</strong>
-              </div>
-              <div className="hero-dashboard__curve" />
+          <div className="hero-dashboard__metrics">
+            {heroMetrics.map((metric) => (
+              <MetricCard
+                key={metric.label}
+                label={metric.label}
+                value={metric.value}
+                tone={metric.tone}
+              />
+            ))}
+          </div>
+
+          <div className="hero-dashboard__footer">
+            <div className="mini-panel">
+              <span>Ventas</span>
+              <strong>Pipeline sincronizado</strong>
             </div>
-
-            <div className="hero-dashboard__metrics">
-              {heroMetrics.map((metric) => (
-                <MetricCard
-                  key={metric.label}
-                  label={metric.label}
-                  value={metric.value}
-                  tone={metric.tone}
-                />
-              ))}
-            </div>
-
-            <div className="hero-dashboard__footer">
-              <div className="mini-panel">
-                <span>Ventas</span>
-                <strong>Pipeline sincronizado</strong>
-              </div>
-              <div className="mini-panel">
-                <span>Operacion</span>
-                <strong>Alertas y seguimiento</strong>
-              </div>
+            <div className="mini-panel">
+              <span>Operacion</span>
+              <strong>Alertas y seguimiento</strong>
             </div>
           </div>
         </div>

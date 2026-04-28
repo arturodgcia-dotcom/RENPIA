@@ -6,7 +6,7 @@ export function FAQSection() {
 
   return (
     <section className="landing-section" id="faq">
-      <div className="section-heading section-heading--center">
+      <div className="section-heading">
         <p className="section-heading__eyebrow">FAQ SEO / AEO</p>
         <h2>Preguntas frecuentes pensadas para visibilidad, claridad y confianza.</h2>
         <p className="section-heading__description">

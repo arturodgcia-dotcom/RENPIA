@@ -9,25 +9,16 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <article className="product-card">
       <div className="product-card__media">
-        <div className="product-card__media-top">
-          <span className="product-card__tag">{product.audience}</span>
-          {product.badge ? <span className="product-card__badge">{product.badge}</span> : null}
-        </div>
+        <span className="product-card__tag">{product.audience}</span>
+        {product.badge ? <span className="product-card__badge">{product.badge}</span> : null}
         <div className="product-card__mockup">
-          <div className="mockup-window">
-            <div className="mockup-window__toolbar">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="mockup-strip" />
-            <div className="mockup-bars">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="mockup-chart" />
+          <div className="mockup-strip" />
+          <div className="mockup-bars">
+            <span />
+            <span />
+            <span />
           </div>
+          <div className="mockup-chart" />
         </div>
       </div>
 
