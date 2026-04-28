@@ -92,3 +92,28 @@ git push -u origin main
 3. Conectar formulario inteligente, newsletter y agenda.
 4. Habilitar despliegue manual al VPS.
 5. Activar CI/CD cuando SSH, dominio y secretos esten listos.
+
+## Ejecucion local
+
+### Backend
+
+```bash
+cd backend
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev -- --host 0.0.0.0 --port 5173
+```
+
+### URLs locales
+
+- Landing: `http://localhost:5173/`
+- Panel interno: `http://localhost:5173/admin`
+- API: `http://localhost:8000`
