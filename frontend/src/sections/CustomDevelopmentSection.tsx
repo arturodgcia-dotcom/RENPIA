@@ -30,7 +30,12 @@ export function CustomDevelopmentSection() {
 
         <aside className="custom-layout__panel">
           <div className="custom-panel">
-            <ProductPreview variant="nervia" mode="laptop" />
+            <ProductPreview
+              image="/renpia-assets/desarrollo-medida.png"
+              fallbackType="dashboard"
+              title="Desarrollo a la medida"
+              mode="laptop"
+            />
             <div className="custom-panel__floating custom-panel__floating--one">CRM personalizado</div>
             <div className="custom-panel__floating custom-panel__floating--two">Agente IA Atencion 24/7</div>
             <div className="custom-panel__floating custom-panel__floating--three">Integraciones Google Suite</div>

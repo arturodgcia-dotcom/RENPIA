@@ -1,35 +1,41 @@
-type PlatformVariant =
-  | "sprintpilot"
-  | "comercia"
-  | "nervia"
-  | "jornada360"
-  | "custom"
+export type FallbackType =
+  | "kanban"
+  | "ecommerce"
+  | "marketing"
+  | "hr"
+  | "dashboard"
   | "consultoria";
 
 type PlatformMockupProps = {
-  variant: PlatformVariant;
-  mode?: "card" | "compact" | "laptop";
+  fallbackType: FallbackType;
+  mode?: "card" | "compact" | "laptop" | "hero";
+  title?: string;
 };
 
-const labels: Record<PlatformVariant, string[]> = {
-  sprintpilot: ["Backlog", "Sprint", "KPIs"],
-  comercia: ["Catalogo", "Pedidos", "Carrito"],
-  nervia: ["Campanas", "Calendario", "ROI"],
-  jornada360: ["Personal", "Asistencia", "Reportes"],
-  custom: ["CRM", "Agente IA", "Dashboards"],
+const labels: Record<FallbackType, string[]> = {
+  kanban: ["Backlog", "Sprint", "KPIs"],
+  ecommerce: ["Catalogo", "Pedidos", "Carrito"],
+  marketing: ["Campanas", "Calendario", "ROI"],
+  hr: ["Personal", "Asistencia", "Reportes"],
+  dashboard: ["CRM", "Agente IA", "Dashboards"],
   consultoria: ["Workshop", "Proceso", "Insights"],
 };
 
-export function PlatformMockup({ variant, mode = "card" }: PlatformMockupProps) {
+export function PlatformMockup({
+  fallbackType,
+  mode = "card",
+  title,
+}: PlatformMockupProps) {
   return (
-    <div className={`platform-mockup platform-mockup--${variant} platform-mockup--${mode}`}>
+    <div className={`platform-mockup platform-mockup--${fallbackType} platform-mockup--${mode}`}>
+      {title ? <span className="platform-mockup__title">{title}</span> : null}
       <div className="platform-mockup__toolbar">
         <span />
         <span />
         <span />
       </div>
       <div className="platform-mockup__chips">
-        {labels[variant].map((label) => (
+        {labels[fallbackType].map((label) => (
           <span key={label}>{label}</span>
         ))}
       </div>

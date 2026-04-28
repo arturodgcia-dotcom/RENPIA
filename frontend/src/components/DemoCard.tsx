@@ -7,10 +7,25 @@ type DemoCardProps = {
 };
 
 export function DemoCard({ demo }: DemoCardProps) {
+  const imageMap: Record<DemoItem["preview"], string> = {
+    sprintpilot: "/renpia-assets/demo-sprintpilot.png",
+    comercia: "/renpia-assets/demo-comercia.png",
+  };
+
+  const fallbackMap: Record<DemoItem["preview"], "kanban" | "ecommerce"> = {
+    sprintpilot: "kanban",
+    comercia: "ecommerce",
+  };
+
   return (
     <article className="demo-card">
       <div className="demo-card__preview">
-        <ProductPreview variant={demo.preview} mode="compact" />
+        <ProductPreview
+          image={imageMap[demo.preview]}
+          fallbackType={fallbackMap[demo.preview]}
+          title={demo.title}
+          mode="compact"
+        />
       </div>
       <span className="demo-card__badge">{demo.badge}</span>
       <h3>{demo.title}</h3>

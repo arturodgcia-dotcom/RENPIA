@@ -1,4 +1,5 @@
 import { DashboardMockup } from "./DashboardMockup";
+import { ProductPreview } from "./ProductPreview";
 
 const productPills = [
   "SprintPilot",
@@ -11,12 +12,13 @@ export function HeroVisual() {
   return (
     <div className="hero-visual">
       <div className="hero-visual__scene">
-        <div className="hero-visual__label">Consultoria RENPIA</div>
-        <div className="hero-visual__people">
-          <div className="hero-visual__person hero-visual__person--one" />
-          <div className="hero-visual__person hero-visual__person--two" />
-        </div>
-        <div className="hero-visual__desk" />
+        <ProductPreview
+          image="/renpia-assets/hero-consultoria.png"
+          fallbackType="consultoria"
+          mode="hero"
+          title="Consultoria RENPIA"
+          alt="Equipo de consultoria RENPIA trabajando con tecnologia"
+        />
         <div className="hero-visual__floating hero-visual__floating--left">
           <span>Diagnostico</span>
           <strong>Procesos + IA</strong>
