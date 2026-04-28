@@ -1,17 +1,20 @@
-import { ButtonLink } from "../components/ButtonLink";
-import { SectionHeader } from "../components/SectionHeader";
+import { Button } from "../components/Button";
 import { agendaOptions } from "../data/siteContent";
 
-export function AgendaSection() {
+export function AppointmentSection() {
   return (
     <section className="landing-section" id="agenda">
       <div className="agenda-layout">
         <div>
-          <SectionHeader
-            eyebrow="Agenda"
-            title="Agenda una llamada con RENPIA"
-            description="Si tu empresa esta lista para mejorar sus procesos, automatizar tareas, implementar agentes de IA o desarrollar una solucion a la medida, agenda una llamada con nuestro equipo."
-          />
+          <div className="section-heading">
+            <p className="section-heading__eyebrow">Agenda</p>
+            <h2>Agenda una llamada con RENPIA</h2>
+            <p className="section-heading__description">
+              Si tu empresa esta lista para mejorar sus procesos, automatizar tareas, implementar
+              agentes de IA o desarrollar una solucion a la medida, agenda una llamada con nuestro
+              equipo.
+            </p>
+          </div>
 
           <p className="agenda-description">
             Nuestro asistente inteligente revisara tu solicitud, clasificara tu necesidad y te
@@ -32,7 +35,7 @@ export function AgendaSection() {
             WhatsApp despues de confirmar tu reunion.
           </p>
 
-          <ButtonLink href="#contacto">Agendar llamada con RENPIA</ButtonLink>
+          <Button href="#contacto">Agendar llamada con RENPIA</Button>
         </div>
 
         <aside className="agenda-visual">

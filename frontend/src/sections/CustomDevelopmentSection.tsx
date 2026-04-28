@@ -1,5 +1,4 @@
-import { ButtonLink } from "../components/ButtonLink";
-import { SectionHeader } from "../components/SectionHeader";
+import { Button } from "../components/Button";
 import { customDevelopmentItems } from "../data/siteContent";
 
 export function CustomDevelopmentSection() {
@@ -7,11 +6,17 @@ export function CustomDevelopmentSection() {
     <section className="landing-section" id="desarrollo-medida">
       <div className="custom-layout">
         <div className="custom-layout__copy">
-          <SectionHeader
-            eyebrow="Desarrollo a la medida"
-            title="Si tu empresa necesita algo unico, en RENPIA disenamos y construimos soluciones personalizadas."
-            description="Pensamos sistemas desde el proceso, la experiencia del equipo y la necesidad del negocio. Eso permite construir plataformas mas utiles, conectadas y sostenibles."
-          />
+          <div className="section-heading">
+            <p className="section-heading__eyebrow">Desarrollo a la medida</p>
+            <h2>
+              Si tu empresa necesita algo unico, en RENPIA disenamos y construimos soluciones
+              personalizadas.
+            </h2>
+            <p className="section-heading__description">
+              Pensamos sistemas desde el proceso, la experiencia del equipo y la necesidad del
+              negocio. Eso permite construir plataformas mas utiles, conectadas y sostenibles.
+            </p>
+          </div>
 
           <ul className="check-list">
             {customDevelopmentItems.map((item) => (
@@ -19,7 +24,7 @@ export function CustomDevelopmentSection() {
             ))}
           </ul>
 
-          <ButtonLink href="#formulario">Solicitar solucion a la medida</ButtonLink>
+          <Button href="#formulario">Solicitar solucion a la medida</Button>
         </div>
 
         <aside className="custom-layout__panel">

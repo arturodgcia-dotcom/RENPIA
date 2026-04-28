@@ -1,4 +1,4 @@
-import { ButtonLink } from "../components/ButtonLink";
+import { Button } from "../components/Button";
 
 const menuItems = [
   { href: "#inicio", label: "Inicio" },
@@ -29,10 +29,10 @@ export function Header() {
       </nav>
 
       <div className="site-header__actions">
-        <ButtonLink href="#formulario" variant="secondary">
+        <Button href="#formulario" variant="secondary">
           Solicitar diagnostico
-        </ButtonLink>
-        <ButtonLink href="#agenda">Agendar demo</ButtonLink>
+        </Button>
+        <Button href="#agenda">Agendar demo</Button>
       </div>
     </header>
   );

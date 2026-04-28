@@ -1,6 +1,6 @@
-import { ButtonLink } from "../components/ButtonLink";
+import { Button } from "../components/Button";
 
-export function FinalCtaSection() {
+export function FinalCTA() {
   return (
     <section className="final-cta" id="contacto">
       <div>
@@ -12,13 +12,13 @@ export function FinalCtaSection() {
       </div>
 
       <div className="final-cta__actions">
-        <ButtonLink href="#agenda">Agendar llamada</ButtonLink>
-        <ButtonLink href="#formulario" variant="secondary">
+        <Button href="#agenda">Agendar llamada</Button>
+        <Button href="#formulario" variant="secondary">
           Solicitar propuesta
-        </ButtonLink>
-        <ButtonLink href="#soluciones" variant="ghost">
+        </Button>
+        <Button href="#soluciones" variant="ghost">
           Ver soluciones
-        </ButtonLink>
+        </Button>
       </div>
     </section>
   );

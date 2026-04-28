@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { SectionHeader } from "../components/SectionHeader";
+import { Button } from "../components/Button";
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("");
@@ -20,11 +20,14 @@ export function NewsletterSection() {
     <section className="landing-section" id="newsletter">
       <div className="newsletter-card">
         <div className="newsletter-card__copy">
-          <SectionHeader
-            eyebrow="Newsletter"
-            title="Recibe ideas, noticias y oportunidades con IA"
-            description="Suscribete para recibir tendencias, casos de uso y oportunidades de automatizacion para tu empresa."
-          />
+          <div className="section-heading">
+            <p className="section-heading__eyebrow">Newsletter</p>
+            <h2>Recibe ideas, noticias y oportunidades con IA</h2>
+            <p className="section-heading__description">
+              Suscribete para recibir tendencias, casos de uso y oportunidades de automatizacion
+              para tu empresa.
+            </p>
+          </div>
 
           <form className="newsletter-form" onSubmit={handleSubmit}>
             <input
@@ -34,9 +37,7 @@ export function NewsletterSection() {
               onChange={(event) => setEmail(event.target.value)}
               aria-label="Tu correo empresarial"
             />
-            <button className="button button--primary" type="submit">
-              Suscribirme
-            </button>
+            <Button type="submit">Suscribirme</Button>
           </form>
 
           {message ? <p className="form-feedback">{message}</p> : null}

@@ -194,6 +194,7 @@ button {
   border-radius: 999px;
   font-weight: 600;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  border: 0;
 }
 
 .button:hover {
@@ -876,6 +877,7 @@ button {
 
 .prospect-form textarea,
 .prospect-form button,
+.prospect-form a,
 .honeypot-field {
   grid-column: 1 / -1;
 }

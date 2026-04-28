@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from "react";
-import { SectionHeader } from "../components/SectionHeader";
+import { Button } from "../components/Button";
 
 type LeadFormData = {
   fullName: string;
@@ -92,11 +92,14 @@ export function LeadFormSection() {
     <section className="landing-section" id="formulario">
       <div className="prospect-layout">
         <div className="prospect-layout__form">
-          <SectionHeader
-            eyebrow="Formulario inteligente para prospectos"
-            title="Formulario inteligente para prospectos"
-            description="Captura informacion estrategica para entender necesidad, prioridad y tipo de solucion que requiere tu empresa."
-          />
+          <div className="section-heading">
+            <p className="section-heading__eyebrow">Formulario inteligente para prospectos</p>
+            <h2>Formulario inteligente para prospectos</h2>
+            <p className="section-heading__description">
+              Captura informacion estrategica para entender necesidad, prioridad y tipo de
+              solucion que requiere tu empresa.
+            </p>
+          </div>
 
           <form className="prospect-form" onSubmit={handleSubmit}>
             <input
@@ -207,9 +210,7 @@ export function LeadFormSection() {
               autoComplete="off"
               aria-hidden="true"
             />
-            <button className="button button--primary" type="submit">
-              Quiero mi diagnostico
-            </button>
+            <Button type="submit">Quiero mi diagnostico</Button>
           </form>
 
           {feedback ? <p className="form-feedback">{feedback}</p> : null}

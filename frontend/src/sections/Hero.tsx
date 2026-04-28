@@ -1,4 +1,5 @@
-import { ButtonLink } from "../components/ButtonLink";
+import { Button } from "../components/Button";
+import { MetricCard } from "../components/MetricCard";
 import { heroMetrics } from "../data/siteContent";
 
 const bulletItems = [
@@ -7,7 +8,7 @@ const bulletItems = [
   "Desarrollos personalizados por sector",
 ] as const;
 
-export function HeroSection() {
+export function Hero() {
   return (
     <section className="hero" id="inicio">
       <div className="hero__copy">
@@ -25,10 +26,10 @@ export function HeroSection() {
         </ul>
 
         <div className="hero__actions">
-          <ButtonLink href="#soluciones">Conoce nuestras soluciones</ButtonLink>
-          <ButtonLink href="#contacto" variant="secondary">
+          <Button href="#soluciones">Conoce nuestras soluciones</Button>
+          <Button href="#contacto" variant="secondary">
             Quiero una propuesta
-          </ButtonLink>
+          </Button>
         </div>
       </div>
 
@@ -50,10 +51,12 @@ export function HeroSection() {
 
           <div className="hero-dashboard__metrics">
             {heroMetrics.map((metric) => (
-              <article key={metric.label} className={`metric-card metric-card--${metric.tone}`}>
-                <span>{metric.label}</span>
-                <strong>{metric.value}</strong>
-              </article>
+              <MetricCard
+                key={metric.label}
+                label={metric.label}
+                value={metric.value}
+                tone={metric.tone}
+              />
             ))}
           </div>
 
